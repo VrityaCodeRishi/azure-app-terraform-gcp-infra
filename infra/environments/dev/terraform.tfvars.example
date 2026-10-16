@@ -1,0 +1,53 @@
+project_id  = "replace-with-your-gcp-project-id"
+region      = "asia-south1"
+environment = "dev"
+name_prefix = "agileengine-capstone"
+
+# Network address plan.
+network_cidr          = "10.10.0.0/20"
+pods_cidr             = "10.20.0.0/16"
+services_cidr         = "10.30.0.0/20"
+private_services_cidr = "10.40.0.0/16"
+
+# Cost-conscious development node pool.
+node_machine_type         = "e2-standard-2"
+node_disk_size_gb         = 50
+node_pool_total_min_nodes = 1
+node_pool_total_max_nodes = 3
+release_channel           = "REGULAR"
+maintenance_start_time    = "20:00"
+deletion_protection       = false
+
+# Private PostgreSQL development instance.
+cloudsql_database_version         = "POSTGRES_16"
+cloudsql_edition                  = "ENTERPRISE"
+cloudsql_tier                     = "db-custom-1-3840"
+cloudsql_availability_type        = "ZONAL"
+cloudsql_disk_size_gb             = 20
+cloudsql_disk_autoresize_limit_gb = 100
+cloudsql_database_name            = "app"
+cloudsql_backup_start_time        = "19:00"
+cloudsql_retained_backups         = 7
+cloudsql_deletion_protection      = false
+
+# Application identity used by GKE Workload Identity and Cloud SQL IAM authentication.
+app_google_service_account_id  = "app-api-cloudsql"
+app_kubernetes_namespace       = "app"
+app_kubernetes_service_account = "app-api"
+
+# External HTTPS endpoint managed with Certificate Manager.
+application_domain = "app.example.com"
+
+# CI/CD foundation. Artifact Registry and the deployer service account are
+# created immediately. Populate the three Azure values before enabling federation.
+artifact_registry_repository_id              = "application"
+azure_devops_deployer_service_account_id      = "azure-devops-deployer"
+azure_devops_federation_enabled               = false
+# azure_devops_issuer_uri                     = "ISSUER_FROM_SERVICE_CONNECTION"
+# azure_devops_allowed_audience               = "fb60f99c-7a34-4190-8149-302f77469936"
+# azure_devops_subject                        = "/eid1/.../sc/AZURE_DEVOPS_ORGANIZATION_ID/SERVICE_CONNECTION_ID"
+
+labels = {
+  owner       = "platform"
+  cost_center = "capstone"
+}

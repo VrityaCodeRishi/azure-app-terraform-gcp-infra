@@ -1,0 +1,4 @@
+# Copy this file to backend.hcl after creating the state bucket.
+# Do not commit backend.hcl.
+bucket = "REPLACE_WITH_YOUR_GCS_STATE_BUCKET"
+prefix = "gcp-capstone/dev/gke"
